@@ -7,7 +7,11 @@ sudo docker rm -f $(sudo docker ps -qa)
 ```
 sudo docker rmi -f $(sudo docker images -aq)
 ```
-3. install docker on iran server (blocked by docker)
+3. install docker
 ```
 curl -fsSL https://get.docker.com | sh
+```
+4. downloading-docker-image-for-transfer-to-non-internet-connected-machine
+```
+https://serverfault.com/questions/701248/downloading-docker-image-for-transfer-to-non-internet-connected-machine
 ```
