@@ -7,3 +7,7 @@ sudo docker rm -f $(sudo docker ps -qa)
 ```
 sudo docker rmi -f $(sudo docker images -aq)
 ```
+3. install docker on iran server (blocked by docker)
+```
+curl -fsSL https://get.docker.com | sh
+```
