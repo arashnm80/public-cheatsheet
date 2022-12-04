@@ -7,3 +7,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-dante-proxy-on-ub
 ```
 https://www.youtube.com/watch?v=vpk_1gldOAE
 ```
+- keep ssh tunnel alive
+```
+ssh -o ServerAliveInterval=600 username@server_ip_address
+```
