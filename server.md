@@ -11,3 +11,20 @@ https://www.youtube.com/watch?v=vpk_1gldOAE
 ```
 ssh -o ServerAliveInterval=600 username@server_ip_address
 ```
+- bash script to always run ssh tunnel and keep it alive (public and private key set should be established before)
+```
+#!/bin/bash
+
+# if not found - equals to 1, start it
+while true
+do
+    ps -ef | grep USER@SERVER-IP | grep -v grep
+    if [ $? -eq 1 ]
+    then
+        /usr/bin/ssh -NfqD 1080 -o ServerAliveInterval=200 USER@SERVER-IP
+    else
+        echo "ssh-tunnel.sh is running"
+    fi
+    sleep 30
+done
+```
