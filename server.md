@@ -28,3 +28,7 @@ do
     sleep 30
 done
 ```
+- add floating ip to server
+```
+sudo ip addr add XXX.XXX.XXX.XXX dev eth0
+```
