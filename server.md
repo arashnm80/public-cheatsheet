@@ -32,3 +32,8 @@ done
 ```
 sudo ip addr add XXX.XXX.XXX.XXX dev eth0
 ```
+- check or delete ip from previous command:
+```
+sudo ip addr show
+sudo ip addr del XXX.XXX.XXX.XXX dev eth0
+```
