@@ -37,3 +37,7 @@ sudo ip addr add XXX.XXX.XXX.XXX dev eth0
 sudo ip addr show
 sudo ip addr del XXX.XXX.XXX.XXX dev eth0
 ```
+- ssh with middle server
+```
+ssh -J <middle-user>:<middle-ip> <user>:<ip>
+```
