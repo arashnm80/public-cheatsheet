@@ -1,0 +1,7 @@
+magick:
+	For vertical stacking (top to bottom): (magick word could be omitted from start of command)
+		magick convert -append 1.png 2.png out.png
+		magick convert -append * out.png
+	For horizontal stacking (left to right):
+		magick convert +append 1.png 2.png out.png
+		magick convert +append * out.png
