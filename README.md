@@ -1,2 +1,2 @@
 # cheatsheet
-my personal cheatsheet
+my public cheatsheet
