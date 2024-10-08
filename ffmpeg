@@ -1,0 +1,35 @@
+ffmpeg:
+	mkv to mp4 all files in a folder:
+		for /R %f IN (*.mkv) DO ffmpeg -i "%f" -c copy "%~nf.mp4"
+
+	lower size (reasonable crf: 24 to 30, lower crf is higher quality) - default preset is medium speed but looks like veryfast is better for making file smaller
+		ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
+		ffmpeg -i input.mp4 -vcodec libx264 -preset veryslow -crf 28 output.mp4
+		ffmpeg -i input.mp4 -vcodec libx264 -preset veryfast -crf 28 output.mp4
+		ffmpeg -i input.mp4 -vcodec libx264 -preset veryfast -tune animation -crf 28 output.mp4
+		ffmpeg -i input.mp4 -vcodec libx264 -preset veryfast -tune film -crf 28 output.mp4
+
+	To change the output frame rate to 30 fps, use the following command:
+		ffmpeg -i <input> -filter:v fps=30 <output>
+
+	convert multiple files at once:
+		prefix mode:	//	only %i after ffmpeg -i could be written both %i or "%i"
+			for %i in (*.mp4) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "edited - %i"
+		postfix mode:
+			check for files in subdirectories too:	//	%~ni = File name	%~xi = File extension	(See	for /?	for more information)
+				for /R %i in (*.mp4) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "%~ni - edited%~xi"
+			check for files in current folder only:	//	/R is the difference
+				for %i in (*.mp4) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "%~ni - edited%~xi"
+				for %i in (*.mp4) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "%~ni - edited.mp4"
+				for %i in (*.mp4) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "%~ni - edited".mp4
+
+	combination of mkv to mp4 & lowering size in a single command:	//	does exactly what happened when we run each command separately, so this is better
+		for %i in (*.mkv) do ffmpeg -i "%i" -vcodec libx264 -preset veryfast -crf 30 "edited - %i"
+
+	concatenate multiple video files:	//	by adding /R after for can be used for all files in subdirectories too,	we can also change (*.mp4) to (*.mkv) to convert mkv to mp4 at the same time
+		(for %i in (*.mp4) do echo file '%i'>> mylist.txt) & (ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4) & (del mylist.txt)
+	fastest way to extract a part of video:
+		from start time with duration:
+			ffmpeg -i input.mp4 -ss 00:01:30 -t 00:00:10 -c copy output.mp4
+		from start time with ending time:
+			ffmpeg -i input.mp4 -ss 00:01:30 -to 00:01:40 -c copy output.mp4
